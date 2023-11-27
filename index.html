@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Light Up Board Game</title>
+  </head>
+  <body>
+    <div class="sign">
+      <h1>Light Up!</h1>
+    </div>
+    <div id="circles-container">
+      <div class="glass-circle1"></div>
+      <div class="glass-circle2"></div>
+      <div class="glass-circle3"></div>
+      <div class="glass-circle4"></div>
+      <div class="glass-circle5"></div>
+    </div>
+
+    <div id="board"></div>
+
+    <div id="overlay2" onclick="hideResult()"></div>
+    <div id="resultOverlay">
+      <div id="resultMessage"></div>
+    </div>
+
+    <button class="button1" onclick="resetBoard()">Reset Board</button>
+    <button class="button2" onclick="choosePuzzle()">New Puzzle</button>
+    <button class="button3" onclick="showRules()">Rules</button>
+    <button class="button4" onclick="checkSolution()">Done</button>
+    <div id="result"></div>
+    <div id="overlay"></div>
+    <div id="rulesPopup">
+      <h2>Light Up Game Rules</h2>
+      <p>
+        Light Up is played on a rectangular grid of cells. You need to place
+        light bulbs in empty cells such that no two bulbs shine on each other,
+        until the entire grid is lit up. A bulb sends rays of light horizontally
+        and vertically, illuminating its entire row and column unless its light
+        is blocked by a wall cell. A wall cell may have a number on it from 0 to
+        4, indicating how many bulbs must be placed adjacent to its four sides;
+        for example, a cell with a 4 must have four bulbs around it, one on each
+        side, and a cell with a 0 cannot have a bulb next to any of its sides.
+        An unnumbered wall cell may have any number of light bulbs adjacent to
+        it, or none. Bulbs placed diagonally adjacent to a numbered cell do not
+        contribute to the bulb count.
+      </p>
+      <button id="okButton" onclick="hideRules()">OK</button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,572 @@
+body {
+  font-family: "VT323", monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(to bottom right, #7071e8, rgb(136, 60, 203));
+  overflow: hidden;
+}
+
+.sign {
+  text-align: center;
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.sign h1 {
+  font-size: 3rem;
+  color: #fdd835;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  text-shadow: 0 0 10px rgba(253, 216, 53, 0.9),
+    0 0 20px rgba(253, 216, 53, 0.9), 0 0 30px rgba(253, 216, 53, 0.9);
+  animation: neon-flashing 1s infinite alternate;
+}
+
+@keyframes neon-flashing {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+#container {
+  display: flex;
+  align-items: flex-start;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  gap: 5px;
+  margin-right: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  animation: fadeInBoard 1s ease-out forwards;
+  border-radius: 5px;
+  position: fixed;
+  top: 20%;
+  left: 12%;
+}
+
+@keyframes fadeInBoard {
+  to {
+    opacity: 1;
+  }
+}
+
+.cell {
+  width: 50px;
+  border-radius: 5px;
+  height: 50px;
+  border: 1px solid #ddd;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  opacity: 0;
+  animation: fadeInCell 1s ease-out forwards;
+}
+
+@keyframes fadeInCell {
+  to {
+    opacity: 1;
+  }
+}
+
+.cell:hover {
+  background-color: rgb(86, 39, 137);
+  transform: scale(1.05);
+}
+.cell.light {
+  background-image: url("bulb.png");
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.wall {
+  background-color: rgb(119, 64, 178);
+}
+
+.numbered-wall {
+  background-color: rgb(119, 64, 178);
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  user-select: none;
+}
+
+#buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.button1 {
+  margin-bottom: 15px;
+  font-family: "VT323", monospace;
+  padding: 15px;
+  width: 300px;
+  font-size: 16px;
+  cursor: pointer;
+  background: rgb(86, 39, 137);
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  position: fixed;
+  top: 35%;
+  right: 16%;
+}
+.button2 {
+  margin-bottom: 15px;
+  font-family: "VT323", monospace;
+  padding: 15px;
+  width: 300px;
+  font-size: 16px;
+  cursor: pointer;
+  background: rgb(86, 39, 137);
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  position: fixed;
+  top: 50%;
+  right: 16%;
+}
+.button3 {
+  margin-bottom: 15px;
+  font-family: "VT323", monospace;
+  padding: 15px;
+  width: 300px;
+  font-size: 16px;
+  cursor: pointer;
+  background: rgb(86, 39, 137);
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  position: fixed;
+  top: 65%;
+  right: 16%;
+}
+.button4 {
+  margin-bottom: 15px;
+  font-family: "VT323", monospace;
+  padding: 15px;
+  width: 300px;
+  font-size: 16px;
+  cursor: pointer;
+  background: rgb(86, 39, 137);
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  position: fixed;
+  top: 80%;
+  right: 16%;
+}
+
+.button1:hover {
+  background: rgb(124, 60, 194);
+  transform: scale(1.05);
+}
+.button2:hover {
+  background: rgb(124, 60, 194);
+  transform: scale(1.05);
+}
+.button3:hover {
+  background: rgb(124, 60, 194);
+  transform: scale(1.05);
+}
+.button4:hover {
+  background: rgb(124, 60, 194);
+  transform: scale(1.05);
+}
+
+#rulesPopup {
+  display: none;
+  position: fixed;
+  color: #ffffff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #7071e8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+  border-radius: 5px;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+#rulesPopup.close {
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 900;
+}
+#resultOverlay {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#resultMessage {
+  padding: 20px;
+  font-size: 40px;
+  color: #fff;
+}
+#okButton {
+  margin-top: 10px;
+  font-family: "VT323", monospace;
+  padding: 8px 16px;
+  background: rgb(93, 37, 153);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+#okButton:hover {
+  background: rgb(86, 39, 137);
+  transform: scale(1.05);
+}
+
+#circles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+#circles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.glass-circle1 {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 50%;
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  animation: float1 10s infinite alternate ease-in-out,
+    moveAround1 25s infinite linear, bumpIntoOthers 10s infinite linear;
+  filter: blur(3px);
+}
+
+.glass-circle2 {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 50%;
+  position: absolute;
+  top: 70%;
+  left: 60%;
+  animation: float2 10s infinite alternate ease-in-out,
+    moveAround2 18s infinite linear, bumpIntoOthers 10s infinite linear;
+  filter: blur(3px);
+}
+
+.glass-circle3 {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 50%;
+  position: absolute;
+  top: 10%;
+  left: 60%;
+  animation: float3 10s infinite alternate ease-in-out,
+    moveAround3 20s infinite linear, bumpIntoOthers 10s infinite linear;
+  filter: blur(3px);
+}
+
+.glass-circle4 {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 50%;
+  position: absolute;
+  top: 30%;
+  left: 80%;
+  animation: float4 10s infinite alternate ease-in-out,
+    moveAround4 30s infinite linear, bumpIntoOthers 10s infinite linear;
+  filter: blur(3px);
+}
+
+.glass-circle5 {
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0)
+  );
+  border-radius: 50%;
+  position: absolute;
+  top: 80%;
+  left: 80%;
+  animation: float5 10s infinite alternate ease-in-out,
+    moveAround5 21s infinite linear, bumpIntoOthers 10s infinite linear;
+  filter: blur(3px);
+}
+
+@keyframes float1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -10px);
+  }
+}
+
+@keyframes float2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -8px);
+  }
+}
+
+@keyframes float3 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -12px);
+  }
+}
+
+@keyframes float4 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -15px);
+  }
+}
+
+@keyframes float5 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -13px);
+  }
+}
+
+@keyframes moveAround1 {
+  0% {
+    top: 2%;
+    left: 2%;
+  }
+  25% {
+    top: 50%;
+    left: 50%;
+  }
+  50% {
+    top: 2%;
+    left: 98%;
+  }
+  75% {
+    top: 50%;
+    left: 50%;
+  }
+  100% {
+    top: 2%;
+    left: 2%;
+  }
+}
+
+@keyframes moveAround2 {
+  0% {
+    top: 70%;
+    left: 60%;
+  }
+  25% {
+    top: 30%;
+    left: 30%;
+  }
+  50% {
+    top: 70%;
+    left: 60%;
+  }
+  75% {
+    top: 30%;
+    left: 30%;
+  }
+  100% {
+    top: 70%;
+    left: 60%;
+  }
+}
+@keyframes moveAround3 {
+  0% {
+    top: 10%;
+    left: 60%;
+  }
+  25% {
+    top: 90%;
+    left: 10%;
+  }
+  50% {
+    top: 10%;
+    left: 60%;
+  }
+  75% {
+    top: 90%;
+    left: 10%;
+  }
+  100% {
+    top: 10%;
+    left: 60%;
+  }
+}
+
+@keyframes moveAround4 {
+  0% {
+    top: 30%;
+    left: 80%;
+  }
+  25% {
+    top: 70%;
+    left: 30%;
+  }
+  50% {
+    top: 30%;
+    left: 80%;
+  }
+  75% {
+    top: 70%;
+    left: 30%;
+  }
+  100% {
+    top: 30%;
+    left: 80%;
+  }
+}
+
+@keyframes moveAround5 {
+  0% {
+    top: 80%;
+    left: 80%;
+  }
+  25% {
+    top: 20%;
+    left: 20%;
+  }
+  50% {
+    top: 80%;
+    left: 80%;
+  }
+  75% {
+    top: 20%;
+    left: 20%;
+  }
+  100% {
+    top: 80%;
+    left: 80%;
+  }
+}
+
+@keyframes bumpIntoOthers {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(5px, 5px);
+  }
+  50% {
+    transform: translate(-5px, -5px);
+  }
+  75% {
+    transform: translate(5px, 5px);
+  }
+}
